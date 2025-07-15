@@ -1,9 +1,11 @@
+import Navbar from "@/components/ui/navbar/Navbar"
 import { Outlet } from "react-router-dom"
+
 
 const LayoutAdmin = () => {
   return (
     <div>
-        <h1>Navbar</h1>
+        <Navbar/>
         <Outlet />
     </div>
   )
