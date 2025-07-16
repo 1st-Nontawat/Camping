@@ -1,4 +1,4 @@
-import { Button } from './components/ui/button' 
+import { Toaster } from "@/components/ui/sonner"
 import AppRoutes from './routes/AppRoutes'
 import './App.css'
 
@@ -9,6 +9,7 @@ function App() {
 
     <>
       <AppRoutes />
+      <Toaster />
     </>
 
   )

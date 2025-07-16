@@ -20,6 +20,7 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/clerk-react";
+import SignOutLink from "./SignOutLink";
 
 const DropdownListManu = () => {
   return (
@@ -55,7 +56,7 @@ const DropdownListManu = () => {
       <SignedIn>
       <DropdownMenuItem>
         {/* <UserButton /> */}
-        <SignOutButton />
+        <SignOutLink />
       </DropdownMenuItem>
       </SignedIn> 
 
