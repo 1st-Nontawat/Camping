@@ -3,6 +3,8 @@ import FormInputs from "@/components/form/FormInputs";
 import TextAreaInputs from "@/components/form/TextAreaInputs";
 import { z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Buttons from "@/components/form/Buttons";
+
 
 
 const campingSchema = z.object({
@@ -16,10 +18,11 @@ const Camping = () => {
   const { register, handleSubmit, formState } = useForm({
     resolver: zodResolver(campingSchema),
   });
-  const { errors } = formState;
-  console.log(errors);
+  const { errors, isSubmitting } = formState;
+  console.log(isSubmitting);
 
-  const onSubmit = (data) => {
+  const onSubmit = async(data) => {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     console.log(data);
   };
 
@@ -52,7 +55,11 @@ const Camping = () => {
             />
           </div>
           <div className="mt-4 text-left">
-            <button type="submit">Submit</button>
+            <Buttons
+              text ="Create Camping"
+              isPending={isSubmitting}
+              type="submit"
+            />
           </div>
         </form>
       </div>
