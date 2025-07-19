@@ -5,7 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Buttons from "@/components/form/Buttons";
 import campingSchema from "@/lib/schemas";
 import CategoryInput from "@/components/form/CategoryInput";
-import Ca from "zod/v4/locales/ca.cjs";
+import Mainmap from "@/components/map/Mainmap.jsx";
+
 
 
 const Camping = () => {
@@ -56,7 +57,7 @@ const Camping = () => {
 
             />
 
-
+            <Mainmap register={register} setValue={setValue} />
 
           </div>
           <div className="mt-4 text-left">
