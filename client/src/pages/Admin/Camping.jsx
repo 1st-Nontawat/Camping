@@ -1,27 +1,21 @@
 import { useForm } from "react-hook-form";
 import FormInputs from "@/components/form/FormInputs";
 import TextAreaInputs from "@/components/form/TextAreaInputs";
-import { z} from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Buttons from "@/components/form/Buttons";
-
-
-
-const campingSchema = z.object({
-  title: z.string().min(2, "Title must be at least 2 characters long"),
-  price: z.coerce.number(),
-  description: z.string().max(50, "Description must be at most 50 characters long"),
-});
+import campingSchema from "@/lib/schemas";
+import CategoryInput from "@/components/form/CategoryInput";
+import Ca from "zod/v4/locales/ca.cjs";
 
 
 const Camping = () => {
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, setValue } = useForm({
     resolver: zodResolver(campingSchema),
   });
   const { errors, isSubmitting } = formState;
   console.log(isSubmitting);
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 3000));
     console.log(data);
   };
@@ -53,10 +47,21 @@ const Camping = () => {
               placeholder="Input your description"
               errors={errors}
             />
+
+            <CategoryInput
+              name="category"
+              register={register}
+              setValue={setValue}
+
+
+            />
+
+
+
           </div>
           <div className="mt-4 text-left">
             <Buttons
-              text ="Create Camping"
+              text="Create Camping"
               isPending={isSubmitting}
               type="submit"
             />
@@ -68,3 +73,4 @@ const Camping = () => {
 };
 
 export default Camping;
+
