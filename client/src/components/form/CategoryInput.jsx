@@ -5,7 +5,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { categories } from "@/lib/categories"
+import { categories } from "@/utils/categories"
 
 
 const CategoryInput = ({ name, register, setValue }) => {

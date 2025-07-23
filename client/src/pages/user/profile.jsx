@@ -2,22 +2,35 @@ import { useForm } from "react-hook-form";
 import FormInputs from "@/components/form/FormInputs";
 import Buttons from "@/components/form/Buttons";
 import axios from "axios";
+import { profileSchema } from "@/utils/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuth } from "@clerk/clerk-react";
 
 const Profile = () => {
-  const { register, handleSubmit, formState } = useForm();
+  const { getToken } = useAuth();
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: zodResolver(profileSchema),
+  });
   const { errors, isSubmitting } = formState;
 
   const onSubmit = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log(data);
-    await axios
-      .post("http://localhost:5000/api/profile", data)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error(err.response.data);
+    const token = await getToken();
+    console.log("Token:", token);
+    console.log("Data:", data);
+    
+    
+    try {
+      const response = await axios.post("http://localhost:5000/api/profile", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
+      console.log("Success:", response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (

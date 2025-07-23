@@ -3,7 +3,7 @@ import FormInputs from "@/components/form/FormInputs";
 import TextAreaInputs from "@/components/form/TextAreaInputs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Buttons from "@/components/form/Buttons";
-import campingSchema from "@/lib/schemas";
+import { campingSchema} from "@/utils/schemas";
 import CategoryInput from "@/components/form/CategoryInput";
 import Mainmap from "@/components/map/Mainmap.jsx";
 
