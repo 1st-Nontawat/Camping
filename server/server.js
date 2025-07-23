@@ -4,15 +4,17 @@ const cors = require('cors');
 const app = express();
 
 const { readdirSync } = require('fs');
+const handleError = require('./middlewares/error');
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-console.log(readdirSync('./routes'));
+
 readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
 
 
+app.use(handleError);
 
 const PORT = 5000;
 
