@@ -6,7 +6,8 @@ import Notfound from "@/pages/Notfound";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Layout from "@/layouts/Layout";
 import LayoutAdmin from "@/layouts/LayoutAdmin";
-import Camping from "@/pages/Admin/Camping"; // Ensure this path is correct
+import Camping from "@/pages/Admin/Camping"; 
+import Profile from "@/pages/user/Profile"; 
 
 
 const AppRoutes = () => {
@@ -19,6 +20,12 @@ const AppRoutes = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
         </Route>
+
+
+        { /* Private User*/ }
+        <Route path="user" element={<Layout />} >
+          <Route path="profile" element={<Profile />} />
+          </Route>
 
         { /* Private */ }
         <Route path="admin" element={<LayoutAdmin />} >
