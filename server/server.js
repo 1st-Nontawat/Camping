@@ -1,16 +1,18 @@
 const express = require('express');
-
+const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
 
-const campingRoute = require('./routes/camping');
-const morgan = require('morgan');
+const { readdirSync } = require('fs');
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.use('/api', campingRoute);
+console.log(readdirSync('./routes'));
+readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
+
+
 
 const PORT = 5000;
 
