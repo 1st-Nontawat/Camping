@@ -5,6 +5,7 @@ import axios from "axios";
 import { profileSchema } from "@/utils/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@clerk/clerk-react";
+import createProfile from "@/api/profile";
 
 const Profile = () => {
   const { getToken } = useAuth();
@@ -16,22 +17,17 @@ const Profile = () => {
 
   const onSubmit = async (data) => {
     const token = await getToken();
-    console.log("Token:", token);
-    console.log("Data:", data);
-    
-    
-    try {
-      const response = await axios.post("http://localhost:5000/api/profile", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log("Success:", response.data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    createProfile(data, token)
+    .then((response) => {
+      console.log("Profile created successfully:", response.data);
+    })
+    .catch((error) => {
+      console.error("Error creating profile:", error);
+    });
   };
+    
+    
+    
 
   return (
     <section>
