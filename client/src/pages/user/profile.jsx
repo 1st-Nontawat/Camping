@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import FormInputs from "@/components/form/FormInputs";
 import Buttons from "@/components/form/Buttons";
-import axios from "axios";
 import { profileSchema } from "@/utils/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "@clerk/clerk-react";

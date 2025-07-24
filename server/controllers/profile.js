@@ -2,14 +2,13 @@ const express = require('../utils/renderError')
 
 
 exports.createProfile = (req, res) => {
-    const { firstname, lastname, clerkid } = req.body;
-    console.log(req.headers.authorization);
+    const { firstname, lastname } = req.body;
+    console.log(req.user);
     try {
         
-        res.send(`Profile created for user: ${firstname} ${lastname} with clerk ID: ${clerkid}`);
+        res.send(`Profile created for user: ${firstname} ${lastname} `);
     } catch (error) {
-        console.error('Profile creation error:', error);
-        renderError(error, req, res);
+        console.log(error.message);
+        nextTick(error);
     }
-}
-
+};

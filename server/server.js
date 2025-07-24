@@ -5,10 +5,14 @@ const app = express();
 
 const { readdirSync } = require('fs');
 const handleError = require('./middlewares/error');
+require('dotenv/config');
+const { clerkMiddleware } = require('@clerk/express');
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(clerkMiddleware());
+  
 
 
 readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
