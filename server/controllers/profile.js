@@ -1,14 +1,27 @@
-const express = require('../utils/renderError')
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-
-exports.createProfile = (req, res) => {
-    const { firstname, lastname } = req.body;
-    console.log(req.user);
+exports.createProfile = async (req, res, next) => {
     try {
         
-        res.send(`Profile created for user: ${firstname} ${lastname} `);
+        const { firstname, lastname } = req.body;
+        const { id } = req.user;
+        const email = req.user.emailAddresses[0].emailAddress; 
+        const profile = await prisma.profile.create({
+            data: {
+                firstName: firstname, 
+                lastName: lastname,   
+                clerkId: id,     
+                email: email
+            }
+        });
+
+        res.json({
+            result: profile,
+            message: "Profile created successfully"
+        });
     } catch (error) {
-        console.log(error.message);
-        nextTick(error);
+        console.error("Error creating profile:", error.message);
+        next(error);
     }
 };
