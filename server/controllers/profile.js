@@ -1,27 +1,41 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-exports.createProfile = async (req, res, next) => {
+exports.createProfile = async (req, res) => {
     try {
-        
-        const { firstname, lastname } = req.body;
-        const { id } = req.user;
-        const email = req.user.emailAddresses[0].emailAddress; 
-        const profile = await prisma.profile.create({
-            data: {
-                firstName: firstname, 
-                lastName: lastname,   
-                clerkId: id,     
+        // 1. รับข้อมูลจาก request body
+        const { firstname, lastname, email } = req.body;
+
+        // 2. ใช้ req.auth() ที่ถูกต้องเพื่อดึง userId
+        const { userId } = req.auth();
+
+        // 3. ใช้ upsert พร้อมแก้ไขชื่อฟิลด์ให้ถูกต้องทั้งหมด
+        const profile = await prisma.profile.upsert({
+            where: {
+                clerkId: userId
+            },
+            update: {
+                firstName: firstname, // แก้ไข: map ไปที่ firstName
+                lastName: lastname,   // แก้ไข: map ไปที่ lastName
+                email: email
+            },
+            create: {
+                clerkId: userId,
+                firstName: firstname, // แก้ไข: map ไปที่ firstName
+                lastName: lastname,   // แก้ไข: map ไปที่ lastName
                 email: email
             }
         });
 
-        res.json({
+        // 4. ส่ง response กลับไปเมื่อสำเร็จ
+        res.status(200).json({
             result: profile,
-            message: "Profile created successfully"
+            message: "Profile created or updated successfully"
         });
+
     } catch (error) {
-        console.error("Error creating profile:", error.message);
-        next(error);
+        // 5. จัดการ Error โดยการส่ง JSON response กลับไป
+        console.error("Error in createProfile:", error.message);
+        res.status(500).json({ error: "Failed to process profile", details: error.message });
     }
 };

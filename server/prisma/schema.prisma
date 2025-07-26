@@ -17,7 +17,7 @@ datasource db {
 
 model Profile {
   id        Int      @id @default(autoincrement())
-  clerkId   String
+  clerkId   String   @unique
   firstName String
   lastName  String
   email     String   
