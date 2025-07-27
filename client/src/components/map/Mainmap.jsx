@@ -10,8 +10,8 @@ function LocationMarker({ position, setPosition, setValue }) {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
       if (setValue) {
-        setValue("lat", e.latlng.lat);
-        setValue("lng", e.latlng.lng);
+        setValue("latitude", e.latlng.lat);
+        setValue("longitude", e.latlng.lng);
       }
     },
   });

@@ -10,8 +10,8 @@ router.get('/camping/:id', authcheck, readCamping);
 
 router.post('/camping', authcheck, createCamping);
 
-router.put('/camping/:id', authcheck, updateCamping);
+router.put('/camping/:id',  updateCamping);
 
-router.delete('/camping/:id', authcheck, deleteCamping);
+router.delete('/camping/:id',  deleteCamping);
 
 module.exports = router;

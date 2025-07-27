@@ -3,23 +3,34 @@ import FormInputs from "@/components/form/FormInputs";
 import TextAreaInputs from "@/components/form/TextAreaInputs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Buttons from "@/components/form/Buttons";
-import { campingSchema} from "@/utils/schemas";
+import { campingSchema } from "@/utils/schemas";
 import CategoryInput from "@/components/form/CategoryInput";
 import Mainmap from "@/components/map/Mainmap.jsx";
-
-
+import { useAuth } from "@clerk/clerk-react";
+import createCamping from "@/api/camping";
 
 const Camping = () => {
-  const { register, handleSubmit, formState, setValue } = useForm({
+  const { getToken } = useAuth();
+
+  const { register, handleSubmit, formState, setValue, reset } = useForm({
     resolver: zodResolver(campingSchema),
   });
+
   const { errors, isSubmitting } = formState;
-  console.log(isSubmitting);
 
   const onSubmit = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log(data);
+    try {
+      const token = await getToken();
+      console.log("Token:", token); 
+      const response = await createCamping(data, token);
+      console.log("Camping created successfully:", response.data);
+      reset();
+    } catch (error) {
+      console.error("Failed to create camping:", error);
+    }
   };
+
+  
 
   return (
     <section>
@@ -48,17 +59,12 @@ const Camping = () => {
               placeholder="Input your description"
               errors={errors}
             />
-
             <CategoryInput
               name="category"
               register={register}
               setValue={setValue}
-
-
             />
-
             <Mainmap register={register} setValue={setValue} />
-
           </div>
           <div className="mt-4 text-left">
             <Buttons
@@ -74,4 +80,3 @@ const Camping = () => {
 };
 
 export default Camping;
-
