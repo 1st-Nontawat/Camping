@@ -7,7 +7,7 @@ import { campingSchema } from "@/utils/schemas";
 import CategoryInput from "@/components/form/CategoryInput";
 import Mainmap from "@/components/map/Mainmap.jsx";
 import { useAuth } from "@clerk/clerk-react";
-import createCamping from "@/api/camping";
+import { createCamping } from "@/api/camping";
 
 const Camping = () => {
   const { getToken } = useAuth();

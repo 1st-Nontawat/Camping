@@ -1,11 +1,21 @@
-import axios from 'axios';
+import axios from "axios";
 
-const createCamping = async (data, token) => {
-    return await axios.post("http://localhost:5000/api/camping", data, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-}
+const API_URL = "http://localhost:5000/api";
 
-export default createCamping;
+export const createCamping = async (data, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post(`${API_URL}/camping`, data, config);
+  return response;
+};
+
+
+export const listCamping = async () => {
+ 
+  const response = await axios.get(`${API_URL}/camping`);
+  return response;
+};
+

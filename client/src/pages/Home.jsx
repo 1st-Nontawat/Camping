@@ -1,15 +1,15 @@
 
+import MapHome from "@/components/map/MapHome";
 
 const Home = () => {
   return (
-    <div>
-      Home
+    <section>
       
-      {/* Case loggin 
-      <SignedIn>
-        <UserButton />
-      </SignedIn> */}
-    </div>
+      
+      <MapHome />
+
+      
+    </section>
   );
 };
 
