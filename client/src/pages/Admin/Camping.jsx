@@ -8,6 +8,7 @@ import CategoryInput from "@/components/form/CategoryInput";
 import Mainmap from "@/components/map/Mainmap.jsx";
 import { useAuth } from "@clerk/clerk-react";
 import { createCamping } from "@/api/camping";
+import FormUploadImage from "@/components/form/FormUploadImage.jsx";
 
 const Camping = () => {
   const { getToken } = useAuth();
@@ -59,11 +60,17 @@ const Camping = () => {
               placeholder="Input your description"
               errors={errors}
             />
-            <CategoryInput
-              name="category"
-              register={register}
-              setValue={setValue}
-            />
+
+            <div>
+              <CategoryInput
+                name="category"
+                register={register}
+                setValue={setValue}
+              />
+              <FormUploadImage setValue={setValue} />
+            </div>
+
+
             <Mainmap register={register} setValue={setValue} />
           </div>
           <div className="mt-4 text-left">
