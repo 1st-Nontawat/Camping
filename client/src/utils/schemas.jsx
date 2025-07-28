@@ -7,6 +7,7 @@ export const campingSchema = z.object({
   category: z.string().min(1, "Category is required"),
   latitude: z.number(),
   longitude: z.number(),
+  image: z.any()
 });
 
 export const profileSchema = z.object({
