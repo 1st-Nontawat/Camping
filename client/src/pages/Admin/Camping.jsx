@@ -6,9 +6,13 @@ import Buttons from "@/components/form/Buttons";
 import { campingSchema } from "@/utils/schemas";
 import CategoryInput from "@/components/form/CategoryInput";
 import Mainmap from "@/components/map/Mainmap.jsx";
-import { useAuth } from "@clerk/clerk-react";
 import { createCamping } from "@/api/camping";
+
+// Clerk
+import { useAuth } from "@clerk/clerk-react";
 import FormUploadImage from "@/components/form/FormUploadImage.jsx";
+import { createAlert } from "@/utils/createAlert";
+
 
 const Camping = () => {
   const { getToken } = useAuth();
@@ -26,6 +30,8 @@ const Camping = () => {
       const response = await createCamping(data, token);
       console.log("Camping created successfully:", response.data);
       reset();
+
+      createAlert("success", "Create Landmark success");
     } catch (error) {
       console.error("Failed to create camping:", error);
     }

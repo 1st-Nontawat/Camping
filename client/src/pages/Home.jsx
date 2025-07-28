@@ -1,12 +1,13 @@
+import CampingContainer from "@/components/home/CampingContainer";
 
-import MapHome from "@/components/map/MapHome";
+
 
 const Home = () => {
   return (
     <section>
       
       
-      <MapHome />
+      <CampingContainer />
 
       
     </section>
