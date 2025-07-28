@@ -1,22 +1,11 @@
 import { LayersControl, TileLayer, Marker, Popup, LayerGroup, Tooltip } from "react-leaflet";
-import { useEffect, useState } from "react";
-import { listCamping } from "@/api/camping";
+import useCampingStore from '@/store/camping-store';
 
 const Layers = () => {
-  const [landmarks, setLandmarks] = useState([]);
-
-  useEffect(() => {
-    const handleGetLandmarks = async () => {
-      try {
-        const res = await listCamping();
-        setLandmarks(res.data);
-      } catch (err) {
-        console.error("Error fetching landmarks:", err);
-      }
-    };
-
-    handleGetLandmarks();
-  }, []);
+    const campings = useCampingStore((state) => state.camping);
+       
+  
+    
 
   return (
     <LayersControl>
@@ -36,7 +25,7 @@ const Layers = () => {
       {/* { Overlay for Landmarks } */}
       <LayersControl.Overlay name="Landmark">
         <LayerGroup>
-        {landmarks.map((item) => (
+        {campings.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
             <Popup>
               {item.title}
