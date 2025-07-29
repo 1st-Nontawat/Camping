@@ -26,9 +26,16 @@ const Mainmap = ({ register, setValue, Location }) => {
   const [position, setPosition] = useState(null);
   const DEFAULT_LOCATION = [13, 100];
 
+  const center = Location && Array.isArray(Location) ? Location : DEFAULT_LOCATION;
+  const markerPosition =
+    Location && Array.isArray(Location)
+      ? { lat: Location[0], lng: Location[1] }
+      : { lat: DEFAULT_LOCATION[0], lng: DEFAULT_LOCATION[1] };
+
+  console.log("Location:", Location);
+
   return (
     <div>
-      {/* ตรวจสอบว่ามี register ก่อนใช้งาน */}
       {register && (
         <>
           <input hidden {...register("latitude")} />
@@ -45,8 +52,8 @@ const Mainmap = ({ register, setValue, Location }) => {
       )}
 
       <MapContainer
-        className="h-[50vh] rounded-md"
-        center={Location || DEFAULT_LOCATION}
+        className="h-[400px] rounded-md"
+        center={center}
         zoom={7}
         scrollWheelZoom={true}
       >
@@ -55,8 +62,7 @@ const Mainmap = ({ register, setValue, Location }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <Marker position={Location || DEFAULT_LOCATION}></Marker>
-
+        <Marker position={markerPosition}></Marker>
 
         <LocationMarker
           position={position}

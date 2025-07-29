@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/campings/Breadcrums";
 import ImageContainer from "../../components/campings/ImageContainer";
 import Description from "../../components/campings/Description";
 import Mainmap from "../../components/map/Mainmap";
+import BookingContainer from "../../booking/BookingContainer";
 
 const CampingDetail = () => {
   const [camping, setCamping] = useState(null);
@@ -43,15 +44,20 @@ const CampingDetail = () => {
       <ImageContainer image={camping.secure_url} name={camping.name} />
 
       {/* Description & Map */}
-       <div className="lg:col-span-8">
-        <Description text={camping.description} />
-        {camping.latitude && camping.longitude && (
-          <>
-            {console.log("location:", [camping.latitude, camping.longitude])}
-            <Mainmap location={[camping.latitude, camping.longitude]} />
-          </>
-        )}
-      </div>
+      <section className="lg:grid lg:grid-cols-12 gap-x-12 mt-12">
+        <div className="lg:col-span-8">
+          <Description text={camping.description} />
+          {camping.latitude && <Mainmap Location={[camping.latitude, camping.longitude]} />}
+        </div>
+        {/* Calender */}
+        <div className="lg:col-span-4 flex flex-col items-center">
+          <BookingContainer
+            campingId={camping.id}
+            price={camping.price}
+            bookings={[]}
+          />
+        </div>
+      </section>
     </div>
   );
 };
