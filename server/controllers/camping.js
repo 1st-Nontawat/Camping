@@ -1,6 +1,6 @@
 const prisma = require('../config/prisma');
 
-exports.listCamping = async (_req, res) => {
+exports.listCamping = async (_req, res, next) => {
     try {
         const landmarks = await prisma.landmark.findMany({
             include: {
@@ -9,12 +9,11 @@ exports.listCamping = async (_req, res) => {
         });
         res.status(200).json(landmarks);
     } catch (error) {
-        console.error("Error listing camping spots:", error);
-        res.status(500).json({ error: "Failed to retrieve camping spots", details: error.message });
+        next(error);
     }
 };
 
-exports.readCamping = async (req, res) => {
+exports.readCamping = async (req, res, next) => {
     try {
         const { id } = req.params;
         const landmark = await prisma.landmark.findUnique({
@@ -30,12 +29,11 @@ exports.readCamping = async (req, res) => {
 
         res.status(200).json(landmark);
     } catch (error) {
-        console.error("Error reading camping spot:", error);
-        res.status(500).json({ error: "Failed to retrieve camping spot", details: error.message });
+        next(error);
     }
 };
 
-exports.createCamping = async (req, res) => {
+exports.createCamping = async (req, res, next) => {
     try {
         const { title, description, latitude, longitude, price, category, image } = req.body;
         
@@ -58,12 +56,11 @@ exports.createCamping = async (req, res) => {
 
         res.status(201).json(newLandmark);
     } catch (error) {
-        console.error("Error creating camping spot:", error);
-        res.status(500).json({ error: "Failed to create camping spot", details: error.message });
+        next(error);
     }
 };
 
-exports.updateCamping = async (req, res) => {
+exports.updateCamping = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { userId } = req.auth();
@@ -87,12 +84,11 @@ exports.updateCamping = async (req, res) => {
 
         res.status(200).json(updatedLandmark);
     } catch (error) {
-        console.error("Error updating camping spot:", error);
-        res.status(500).json({ error: "Failed to update camping spot", details: error.message });
+        next(error);
     }
 };
 
-exports.deleteCamping = async (req, res) => {
+exports.deleteCamping = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { userId } = req.auth();
@@ -115,7 +111,6 @@ exports.deleteCamping = async (req, res) => {
 
         res.status(200).json({ message: "Camping spot deleted successfully" });
     } catch (error) {
-        console.error("Error deleting camping spot:", error);
-        res.status(500).json({ error: "Failed to delete camping spot", details: error.message });
+        next(error);
     }
 };

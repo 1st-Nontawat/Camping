@@ -19,3 +19,9 @@ export const listCamping = async () => {
   return response;
 };
 
+
+
+export const readCamping = async (id) => {
+  const response = await axios.get(`${API_URL}/camping/${id}`);
+  return response;
+}

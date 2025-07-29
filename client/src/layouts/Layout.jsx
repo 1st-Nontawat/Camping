@@ -5,7 +5,7 @@ export const Layout = () => {
   return (
     <div>
         <Navbar />
-        <hr />
+        {/* <hr /> */}
     <Outlet />
     </div>
    

@@ -8,6 +8,8 @@ import Layout from "@/layouts/Layout";
 import LayoutAdmin from "@/layouts/LayoutAdmin";
 import Camping from "@/pages/Admin/Camping"; 
 import Profile from "@/pages/user/Profile"; 
+import ProtectRoute from "./ProtectRoute";
+import CampingDetail from "../pages/user/CampingDetail";
 
 
 const AppRoutes = () => {
@@ -25,11 +27,12 @@ const AppRoutes = () => {
         { /* Private User*/ }
         <Route path="user" element={<Layout />} >
           <Route path="profile" element={<Profile />} />
+          <Route path="camping/:id" element={<CampingDetail />} />
           </Route>
 
         { /* Private */ }
-        <Route path="admin" element={<LayoutAdmin />} >
-          
+        <Route path="admin" element={<ProtectRoute  el={<LayoutAdmin />} />} >
+
           <Route index element={<Dashboard />} />
           <Route path="manage" element={<Manage />} />     
           <Route path="camping" element={<Camping />} />

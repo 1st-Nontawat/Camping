@@ -10,7 +10,7 @@ import {
 import { AlignLeft } from "lucide-react";
 import Usericon from "./Usericon";
 import { Button } from "../button";
-import { links } from "@/utils/link";
+import { publicLinks,privateLinks } from "@/utils/link";
 import { Link } from "react-router-dom";
 import {
   SignedIn,
@@ -35,7 +35,7 @@ const DropdownListManu = () => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        {links.map((Item, index) => (
+        {publicLinks.map((Item, index) => (
           <DropdownMenuItem key={index} asChild>
             <Link to={Item.href}>{Item.label}</Link>
           </DropdownMenuItem>
@@ -54,6 +54,12 @@ const DropdownListManu = () => {
 
        
       <SignedIn>
+      {privateLinks.map((Item, index) => (
+          <DropdownMenuItem key={index} asChild>
+            <Link to={Item.href}>{Item.label}</Link>
+          </DropdownMenuItem>
+        ))}
+      <DropdownMenuSeparator />
       <DropdownMenuItem>
         {/* <UserButton /> */}
         <SignOutLink />
