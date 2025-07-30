@@ -27,17 +27,7 @@ const BookingCalendar = () => {
         disabled={range.from && range.to}
         className="rounded-md border"
       />
-      <style jsx>{`
-        button[disabled] {
-          background: #000000 !important;
-          color: #fff !important;
-          border-radius: 8px !important; 
-          border: none !important;
-          box-shadow: none !important;
-          opacity: 1 !important; 
-          pointer-events: none;
-        }
-      `}</style>
+    
     </div>
   );
 };
