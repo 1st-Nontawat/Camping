@@ -2,6 +2,7 @@ import { Card, CardTitle } from "@/components/ui/card";
 import useBookingStore from "@/store/booking-store";
 import { calTotal } from "@/utils/booking";
 import { formatNumber } from "@/utils/formatNumber";
+import BookingComfirm from "./BookingComfirm";
 
 
 
@@ -30,6 +31,7 @@ const BookingForm = () => {
           </span>
         </p>
       </Card>
+      <BookingComfirm />
     </div>
   );
 };
