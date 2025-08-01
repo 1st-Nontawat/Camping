@@ -10,6 +10,7 @@ import Camping from "@/pages/Admin/Camping";
 import Profile from "@/pages/user/Profile"; 
 import ProtectRoute from "./ProtectRoute";
 import CampingDetail from "../pages/user/CampingDetail";
+import Checkout from "../pages/user/Checkout";
 
 
 const AppRoutes = () => {
@@ -28,6 +29,7 @@ const AppRoutes = () => {
         <Route path="user" element={<Layout />} >
           <Route path="profile" element={<Profile />} />
           <Route path="camping/:id" element={<CampingDetail />} />
+          <Route path="checkout/:id" element={<Checkout />} />
           </Route>
 
         { /* Private */ }

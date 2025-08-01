@@ -21,6 +21,8 @@ const BookingConfirm = () => {
 
   const navigate = useNavigate();
 
+  
+
   useEffect(() => {
     if (campingId) setValue("campingId", campingId);
     if (checkIn) setValue("checkIn", checkIn);
@@ -32,7 +34,8 @@ const BookingConfirm = () => {
     const token = await getToken();
     try {
       const res = await createBooking(token, value);
-      const bookingId = res.data.result;
+      const bookingId = res.data.bookingId; 
+  
       navigate(`/user/checkout/${bookingId}`);
     } catch (error) {
       console.log(error);
