@@ -1,9 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const { calTotal } = require("../utils/booking");
-const stripe = require("stripe")(
-  "sk_test_51RsLXM4fhzlEb0CvFJA4KHYhK86PXpPEtZm4AIdVKQ3pIFN9Er7DzQ0mMt78VsUaxO1kbAOwut9LfrAPVwQTZKxn006J4DIb3W"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.createBooking = async (req, res, next) => {
   try {
