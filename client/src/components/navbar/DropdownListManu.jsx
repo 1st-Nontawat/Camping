@@ -9,7 +9,7 @@ import {
 
 import { AlignLeft } from "lucide-react";
 import Usericon from "./Usericon";
-import { Button } from "../button";
+import { Button } from "../ui/button";
 import { publicLinks,privateLinks } from "@/utils/link";
 import { Link } from "react-router-dom";
 import {

@@ -3,6 +3,37 @@ const prisma = new PrismaClient();
 const { calTotal } = require("../utils/booking");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
+
+exports.listBookings = async (req, res, next) => {
+  try {
+    const { id } = req.user;
+
+    const bookings = await prisma.booking.findMany({
+      where: {
+        profileId: id,
+        paymentStatus: true,
+      },
+      include: {
+        landmark: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+      orderBy: {
+        checkIn: "asc",
+      },
+    });
+    
+
+    res.json({ result: bookings, message: "สู้ๆ นะ" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 exports.createBooking = async (req, res, next) => {
   try {
     const { campingId, checkIn, checkOut } = req.body;

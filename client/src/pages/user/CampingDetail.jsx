@@ -5,7 +5,7 @@ import Breadcrumbs from "@/components/campings/Breadcrums";
 import ImageContainer from "../../components/campings/ImageContainer";
 import Description from "../../components/campings/Description";
 import Mainmap from "../../components/map/Mainmap";
-import BookingContainer from "../../booking/BookingContainer";
+import BookingContainer from "../../components/booking/BookingContainer"
 
 const CampingDetail = () => {
   const [camping, setCamping] = useState(null);

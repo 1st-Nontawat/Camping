@@ -1,8 +1,8 @@
 // rafce
 import useBookingStore from "@/store/booking-store";
-import Buttons from "../components/form/Buttons"; 
+import Buttons from "../form/Buttons"; 
 import { SignInButton, useAuth } from "@clerk/clerk-react";
-import { Button } from "../components/ui/button";
+import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { createBooking } from "@/api/booking";
