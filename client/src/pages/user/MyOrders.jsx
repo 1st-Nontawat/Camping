@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatDate, formatNumber } from "@/utils/formats";
+import BookingPDF from "@/components/booking/BookingPDF";
 
 const MyOrders = () => {
  
@@ -66,6 +67,7 @@ const MyOrders = () => {
                 <TableCell>{formatNumber(total)}</TableCell>
                 <TableCell>{formatDate(checkIn)}</TableCell>
                 <TableCell>{formatDate(checkOut)}</TableCell>
+                <TableCell> <BookingPDF booking={item} />   </TableCell>
                 <TableCell>
 
                 </TableCell>
