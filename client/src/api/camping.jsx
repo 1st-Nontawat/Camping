@@ -13,9 +13,9 @@ export const createCamping = async (data, token) => {
 };
 
 
-export const listCamping = async () => {
+export const listCamping = async (id) => {
  
-  const response = await axios.get(`${API_URL}/camping`);
+  const response = await axios.get(`${API_URL}/campings/${id}`);
   return response;
 };
 

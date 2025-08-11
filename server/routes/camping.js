@@ -4,7 +4,7 @@ const { listCamping, readCamping ,createCamping, updateCamping, deleteCamping  }
 
 const { authcheck } = require('../middlewares/auth');
 
-router.get('/camping', listCamping);
+router.get('/campings/:id', listCamping);
 
 router.get('/camping/:id',  readCamping);
 

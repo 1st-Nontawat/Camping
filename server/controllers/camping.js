@@ -1,14 +1,22 @@
 const prisma = require('../config/prisma');
 
-exports.listCamping = async (_req, res, next) => {
+exports.listCamping = async (req, res, next) => {
     try {
-        const landmarks = await prisma.landmark.findMany({
+        const { id } = req.params;
+        const campings = await prisma.landmark.findMany({
             include: {
-                profile: true
-            }
+                favorites: {
+                    where: { profileId: id },
+                    select: { id: true },
+                },
+            },
         });
-        
-        res.status(200).json({ result: landmarks });
+        const campingWithLike = campings.map((item) => ({
+            ...item,
+            isFavoraite: item.favorites.length > 0
+        }));
+
+        res.json({ result: campingWithLike });
     } catch (error) {
         next(error);
     }
