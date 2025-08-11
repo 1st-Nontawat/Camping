@@ -2,14 +2,13 @@ import { listCamping } from "@/api/camping";
 import { create } from "zustand";
 
 const campingStore = (set) => ({
-    camping: [],
+    campings: [],
     actionListCamping: async () => {
         try {
             const res = await listCamping();
-            set({ camping: res.data || [] });
+            set({ campings: res.data.result || [] });
         } catch (error) {
-            console.error('Failed to fetch camping data:', error);
-            set({ camping: [] });
+            console.log(error)
         }
     }
 });

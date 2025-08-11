@@ -2,7 +2,7 @@ import { LayersControl, TileLayer, Marker, Popup, LayerGroup, Tooltip } from "re
 import useCampingStore from '@/store/camping-store';
 
 const Layers = () => {
-    const campings = useCampingStore((state) => state.camping);
+    const campings = useCampingStore((state) => state.campings);
        
   
     

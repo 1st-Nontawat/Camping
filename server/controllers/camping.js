@@ -7,7 +7,8 @@ exports.listCamping = async (_req, res, next) => {
                 profile: true
             }
         });
-        res.status(200).json(landmarks);
+        
+        res.status(200).json({ result: landmarks });
     } catch (error) {
         next(error);
     }
