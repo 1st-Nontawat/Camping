@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { listCamping, readCamping ,createCamping, updateCamping, deleteCamping  } = require('../controllers/camping');
+const {
+    listCamping, readCamping ,createCamping, updateCamping, deleteCamping , actionFavorite
+} = require('../controllers/camping');
 
 const { authcheck } = require('../middlewares/auth');
 
@@ -13,5 +15,8 @@ router.post('/camping', authcheck, createCamping);
 router.put('/camping/:id',  updateCamping);
 
 router.delete('/camping/:id',  deleteCamping);
+
+router.post('/favorite', authcheck, actionFavorite);
+
 
 module.exports = router;

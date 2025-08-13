@@ -123,3 +123,37 @@ exports.deleteCamping = async (req, res, next) => {
         next(error);
     }
 };
+
+
+exports.actionFavorite = async (req, res, next) => {
+  try {
+    
+    const { campingId, isFavorite } = req.body;
+    const { id } = req.user;
+
+    
+    let result;
+    if (isFavorite) {
+      result = await prisma.favorite.deleteMany({
+        where: {
+          profileId: id,
+          landmarkId: campingId,
+        },
+      });
+    } else {
+      result = await prisma.favorite.create({
+        data: {
+          landmarkId: campingId,
+          profileId: id,
+        },
+      });
+    }
+
+    res.json({
+      message: isFavorite ? "Remove Favorite" : "Add Favorite",
+      result: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -1,15 +1,30 @@
-import { Heart } from "lucide-react";
 
-export const CardSubmitButtons = () => {
- 
+import { Heart, RotateCw } from "lucide-react";
+
+export const CardSubmitButtons = ( { isPending, isFavorite }) => {
+  console.log(isPending);
+
   return (
-    <div>
-        <Heart
+    <button>
+      { 
+        isPending
+        ? <RotateCw className= "animate-spin "/>
+        : isFavorite
+        ? <Heart
           className="hover:scale-110 hover:duration-300"
           fill="red"
           size={34}
           stroke="white"
         />
-    </div>
+        : <Heart
+          className="hover:scale-110 hover:duration-300"
+          fill="black"
+          size={34}
+          stroke="white"
+        />
+
+      } 
+    </button>
+
   );
 };
