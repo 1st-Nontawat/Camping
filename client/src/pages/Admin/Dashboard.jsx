@@ -1,6 +1,10 @@
+import StateContainer from "@/components/admin/StateContainer";
+
 export const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+      <StateContainer />
+    </div>
   )
 }
 
