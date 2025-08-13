@@ -1,12 +1,12 @@
 import useCampingStore from "@/store/camping-store";
-import { CardSubmitButtons } from "./CardButtons";
+import { CardSubmitButtons, CardSignInButtons } from "./CardButtons";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@clerk/clerk-react";
 import {  createNofity } from "@/utils/createAlert";
 
 const FavoriteToggleButton = ({ campingId, isFavorite }) => {
  
-  const { getToken } = useAuth();
+  const { getToken, isSignedIn } = useAuth();
   
   const { handleSubmit, formState } = useForm();
   const { isSubmitting } = formState;
@@ -30,6 +30,10 @@ const FavoriteToggleButton = ({ campingId, isFavorite }) => {
     }
     
   };
+
+   if(!isSignedIn){
+    return <CardSignInButtons />
+  }
 
   
   return (

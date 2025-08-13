@@ -36,3 +36,13 @@ export const addOrRemoveFavorite = async (token, data) => {
   const response = await axios.post(`${API_URL}/favorite`, data, config);
   return response;
 };
+
+export const listFavorites = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(`${API_URL}/favorites`, config);
+  return response;
+};

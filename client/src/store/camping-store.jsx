@@ -1,4 +1,4 @@
-import { addOrRemoveFavorite, listCamping } from "@/api/camping";
+import { addOrRemoveFavorite, listCamping, listFavorites } from "@/api/camping";
 import { create } from "zustand";
 
 const campingStore = (set, get) => ({
@@ -31,22 +31,30 @@ const campingStore = (set, get) => ({
       
       set({ campings: updatedCamping });
 
-      // Update favorites
+      
       const favorites = get().favorites;
       const updatedFavorite = favorites.filter((item) => {
         return item.landmark.id !== campingId;
       });
       set({ favorites: updatedFavorite });
 
-      // console.log(res.data.message);
+      
       return { success: true, message: res.data.message };
-      // logic
+      
     } catch (error) {
-      // console.log(error?.response?.data?.message);
+      
       const err = error?.response?.data?.message;
       return { success: false, message: err };
     }
   },
+  actionListFavorites: async (token) => {
+    try {
+      const res = await listFavorites(token);
+      set({ favorites: res.data.result });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 });
 
