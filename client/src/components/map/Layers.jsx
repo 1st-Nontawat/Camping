@@ -25,7 +25,7 @@ const Layers = () => {
       {/* { Overlay for Landmarks } */}
       <LayersControl.Overlay name="Landmark">
         <LayerGroup>
-        {campings.map((item) => (
+        {campings && campings.map((item) => (
           <Marker key={item.id} position={[item.latitude, item.longitude]}>
             <Popup>
               {item.title}

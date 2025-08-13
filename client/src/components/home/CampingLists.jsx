@@ -7,7 +7,7 @@ const CampingLists = () => {
 
     return (
         <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-4">
-            {campings.map((item) => (
+            {campings && campings.map((item) => (
                 <CampingCard key={item.id} camping={item} />
             ))}
         </section>

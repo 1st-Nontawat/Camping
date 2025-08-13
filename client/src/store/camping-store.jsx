@@ -1,4 +1,4 @@
-import { addOrRemoveFavorite, listCamping, listFavorites } from "@/api/camping";
+import { addOrRemoveFavorite, listCamping, listFavorites, filterCamping  } from "@/api/camping";
 import { create } from "zustand";
 
 const campingStore = (set, get) => ({
@@ -54,7 +54,16 @@ const campingStore = (set, get) => ({
     } catch (error) {
       console.log(error);
     }
-  }
+  },
+   actionFilter: async (category = "", search = "") => {
+    try {
+      const res = await filterCamping(category, search);
+  
+      set({ campings: res.data.result, center: res.data.center });
+    } catch (error) {
+      console.log(error);
+    }
+  },
 
 });
 

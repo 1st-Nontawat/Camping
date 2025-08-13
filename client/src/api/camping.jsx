@@ -46,3 +46,11 @@ export const listFavorites = async (token) => {
   const response = await axios.get(`${API_URL}/favorites`, config);
   return response;
 };
+
+
+export const filterCamping =  (category, search) => {
+
+  const response =  axios.get(`${API_URL}/filter-camping?category=${category}&search=${search}`);
+  return response;
+};
+
